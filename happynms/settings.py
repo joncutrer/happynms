@@ -19,6 +19,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'ipam.apps.IpamConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -150,3 +151,50 @@ ACCOUNT_SESSION_REMEMBER = True
 
 
 INTERNAL_IPS = ['127.0.0.1']
+
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+    },
+    'handlers': {
+        'console': {
+            'level': 'DEBUG',
+            'class': 'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+        'file_django_log': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'tmp/log/django.log',
+        },
+        'file_app_log': {
+            'level': 'DEBUG',
+            'class': 'logging.FileHandler',
+            'filename': 'tmp/log/app.log',
+        },
+    },
+    'loggers': {
+        'django': {
+            'handlers': ['file_django_log'],
+            'level': 'DEBUG',
+            'propagate': False,
+        },
+        'happynms': {
+            'handlers': ['file_app_log'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+        'happynms.console': {
+            'handlers': ['console'],
+            'level': 'INFO'
+        }
+    },
+}

@@ -3,6 +3,10 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf.urls import url
 
+admin.site.site_title = 'happynms backend'
+admin.site.site_header = 'happynms backend'
+admin.site.index_title = 'grata dominus'
+
 urlpatterns = [
     path('', include('pages.urls')),
 
